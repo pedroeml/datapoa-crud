@@ -24,10 +24,13 @@
       <span>DataPoa CRUD</span>
       <!-- This fills the remaining space of the current row -->
       <span class="fill-remaining-space"></span>
-      <a [routerLink]="['/home']" routerLinkActive="router-link-active" *ngIf="!(isHandset$ | async)">Início</a>
-      <a [routerLink]="['/linhas-onibus']" routerLinkActive="router-link-active" *ngIf="!(isHandset$ | async)">Linhas de Ônibus</a>
-      <a [routerLink]="['/linhas-lotacao']" routerLinkActive="router-link-active" *ngIf="!(isHandset$ | async)">Linhas de Lotação</a>
-      <a [routerLink]="['/itinerario-unidade']" routerLinkActive="router-link-active" *ngIf="!(isHandset$ | async)">Itinerário de Unidade</a>
+      <button mat-icon-button [routerLink]="['/home']" routerLinkActive="router-link-active" *ngIf="!(isHandset$ | async)">Início</button>
+      <button mat-icon-button [routerLink]="['/itinerario-unidade']" routerLinkActive="router-link-active" *ngIf="!(isHandset$ | async)">Itinerário</button>
+      <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!(isHandset$ | async)">Linhas</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/linhas-onibus']" routerLinkActive="router-link-active">Ônibus</button>
+        <button mat-menu-item [routerLink]="['/linhas-lotacao']" routerLinkActive="router-link-active">Lotação</button>
+      </mat-menu>
     </mat-toolbar>
     <!-- Add Content Here -->
     <ng-content></ng-content>
