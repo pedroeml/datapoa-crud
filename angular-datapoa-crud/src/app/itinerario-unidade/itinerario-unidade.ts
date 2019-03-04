@@ -1,8 +1,5 @@
 import { Coordenadas } from './coordenadas';
 
 export class ItinerarioUnidade {
-  id: string;
-  nome: string;
-  codigo: string;
-  coordenadas: Coordenadas[];
+  constructor(public id: string, public nome: string, public codigo: string, public coordenadas: Coordenadas[]) { }
 }

@@ -1,4 +1,3 @@
 export class Coordenadas {
-  lat: string;
-  lng: string;
+  constructor(public lat: string, public lng: string) {  }
 }
