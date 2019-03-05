@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged, switchMap, tap,  } from 'rxjs/opera
 import { ItinerarioUnidadeService } from '../itinerario-unidade.service';
 import { ItinerarioUnidade } from '../itinerario-unidade';
 import { Coordenadas } from '../coordenadas';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-itinerario-unidade-details',
@@ -21,7 +22,10 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
   private displayedColumns: string[];
   private dataSource: MatTableDataSource<Coordenadas>;
 
-  constructor(private itinerarioUnidadeService: ItinerarioUnidadeService, private formBuilder: FormBuilder) { }
+  constructor(
+    private itinerarioUnidadeService: ItinerarioUnidadeService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.isLoading = false;
@@ -42,6 +46,11 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
         this.dataSource = itinerario ? new MatTableDataSource(this.itinerario.coordenadas) : undefined;
         this.wasFound = itinerario ? true : false;
       });
+    this.route.params.subscribe((params: ParamMap) => {
+      if (params['id']) {
+        this.form.get('utIdCtrl').setValue(params['id']);
+      }
+    });
   }
 
   private getItinerario(unidadeId: string): Observable<ItinerarioUnidade> {

@@ -5,6 +5,9 @@ import { ItinerarioUnidadeDetailsComponent } from './itinerario-unidade-details/
 const routes: Routes = [{
   path: '',
   component: ItinerarioUnidadeDetailsComponent
+}, {
+  path: ':id',
+  component: ItinerarioUnidadeDetailsComponent
 }];
 
 @NgModule({
