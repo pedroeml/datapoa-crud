@@ -15,3 +15,7 @@ table {
   height: 100%;
   overflow: auto;
 }
+
+th.mat-sort-header-sorted {
+  color: black;
+}
