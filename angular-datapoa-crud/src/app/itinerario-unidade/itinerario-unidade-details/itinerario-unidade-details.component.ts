@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { debounceTime, distinctUntilChanged, switchMap, tap,  } from 'rxjs/operators';
 
 import { ItinerarioUnidadeService } from '../itinerario-unidade.service';
@@ -21,6 +21,9 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
   private itinerario: ItinerarioUnidade;
   private displayedColumns: string[];
   private dataSource: MatTableDataSource<Coordenadas>;
+  private tableSizeOptions = [5, 10, 20];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private itinerarioUnidadeService: ItinerarioUnidadeService,
@@ -32,7 +35,7 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
     this.wasFound = true;
     this.itinerario = undefined;
     this.dataSource = undefined;
-    this.displayedColumns = ['lat', 'lng'];
+    this.displayedColumns = ['map', 'lat', 'lng'];
     this.form = this.formBuilder.group({
       utIdCtrl: ['', [Validators.pattern('^[0-9]*$'), Validators.minLength(1)]]
     });
@@ -43,8 +46,14 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
       switchMap(search => this.getItinerario(search)),
       tap(_ => (this.isLoading = false))).subscribe(itinerario => {
         this.itinerario = itinerario;
-        this.dataSource = itinerario ? new MatTableDataSource(this.itinerario.coordenadas) : undefined;
-        this.wasFound = itinerario ? true : false;
+        if (itinerario) {
+          this.dataSource = new MatTableDataSource(this.itinerario.coordenadas);
+          this.dataSource.paginator = this.paginator;
+          this.wasFound = true;
+        } else {
+          this.dataSource = undefined;
+          this.wasFound = false;
+        }
       });
     this.route.params.subscribe((params: ParamMap) => {
       if (params['id']) {
