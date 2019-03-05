@@ -1,3 +1,4 @@
+import { tap, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -31,7 +32,16 @@ export class LinhasOnibusListComponent implements OnInit {
     this.onibusList = undefined;
     this.dataSource = undefined;
     this.displayedColumns = ['id', 'nome', 'codigo'];
-    this.isLoading = true
+    this.form = this.formBuilder.group({
+      filterCtrl: ['', []]
+    });
+    this.form.get('filterCtrl').valueChanges.pipe(
+      tap(_ => (this.isLoading = true)),
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(search => this.applyFilter(search)),
+      tap(_ => (this.isLoading = false))).subscribe();
+    this.isLoading = true;
     this.getLinhasOnibus().subscribe(onibusList => {
       this.onibusList = onibusList;
       if (onibusList) {
@@ -45,6 +55,11 @@ export class LinhasOnibusListComponent implements OnInit {
 
   private getLinhasOnibus(): Observable<Onibus[]> {
     return this.linhasOnibusService.getLinhasOnibus();
+  }
+
+  applyFilter(filterValue: string): Onibus[] {
+    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+    return this.dataSource.filteredData;
   }
 
 }

@@ -1,6 +1,16 @@
 <mat-card>
   <mat-card-title>Linhas de Ônibus</mat-card-title>
   <mat-card-content>
+    <div class="top-container">
+      <form [formGroup]="form">
+        <mat-form-field appearance="standard" class="full-width">
+          <input matInput type="search" placeholder="Filtro" formControlName="filterCtrl">
+          <mat-spinner matSuffix [diameter]="20" *ngIf="isLoading"></mat-spinner>
+          <mat-hint align="end">Filtre por nome, código ou ID.</mat-hint>
+        </mat-form-field>
+      </form>
+    </div>
+
     <div class="table-container">
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="id">
@@ -31,7 +41,5 @@
 
       <mat-paginator [pageSizeOptions]="tableSizeOptions" showFirstLastButtons></mat-paginator>
     </div>
-    
-    <mat-spinner style="margin: 15px auto;" *ngIf="isLoading"></mat-spinner>
   </mat-card-content>
 </mat-card>
