@@ -1,0 +1,50 @@
+.mat-card {
+    width: 600px;
+    margin: auto;
+}
+
+.mat-card .full-width {
+    width: 100%;
+}
+
+.top-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+table {
+    width: 100%;
+}
+
+.table-container {
+    height: 100%;
+    overflow: auto;
+}
+
+.details-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 15px 0;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.item > a {
+    margin: 0 10px;
+}
+
+.key {
+    font-weight: bold;
+}
+
+.value {
+    display: block;
+    width: 20em;
+}

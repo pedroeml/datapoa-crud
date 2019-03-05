@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { MatTableDataSource, ErrorStateMatcher } from '@angular/material';
+import { debounceTime, distinctUntilChanged, switchMap, tap,  } from 'rxjs/operators';
 
 import { ItinerarioUnidadeService } from '../itinerario-unidade.service';
 import { ItinerarioUnidade } from '../itinerario-unidade';
+import { Coordenadas } from '../coordenadas';
 
 @Component({
   selector: 'app-itinerario-unidade-details',
@@ -9,17 +14,35 @@ import { ItinerarioUnidade } from '../itinerario-unidade';
   styleUrls: ['./itinerario-unidade-details.component.css']
 })
 export class ItinerarioUnidadeDetailsComponent implements OnInit {
-  unidadeId: string;
-  itinerario: ItinerarioUnidade;
+  private form: FormGroup;
+  private isLoading: boolean;
+  private itinerario: ItinerarioUnidade;
+  private displayedColumns: string[];
+  private dataSource: MatTableDataSource<Coordenadas>;
 
-  constructor(private itinerarioUnidadeService: ItinerarioUnidadeService) { }
+  constructor(private itinerarioUnidadeService: ItinerarioUnidadeService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.unidadeId = '';
+    this.isLoading = false;
+    this.itinerario = undefined;
+    this.dataSource = undefined;
+    this.displayedColumns = ['lat', 'lng'];
+    this.form = this.formBuilder.group({
+      utIdCtrl: ['', [Validators.pattern('^[0-9]*$'), Validators.minLength(1)]]
+    });
+    this.form.get('utIdCtrl').valueChanges.pipe(
+      tap(_ => (this.isLoading = true)),
+      debounceTime(600),
+      distinctUntilChanged(),
+      switchMap(search => this.getItinerario(search)),
+      tap(_ => (this.isLoading = false))).subscribe(itinerario => {
+        this.itinerario = itinerario;
+        this.dataSource = itinerario ? new MatTableDataSource(this.itinerario.coordenadas) : undefined;
+      });
   }
 
-  getItinerario(): void {
-    this.itinerarioUnidadeService.getItinerario(this.unidadeId).subscribe(itinerario => this.itinerario = itinerario);
+  private getItinerario(unidadeId: string): Observable<ItinerarioUnidade> {
+    return this.itinerarioUnidadeService.getItinerario(unidadeId);
   }
 
 }
