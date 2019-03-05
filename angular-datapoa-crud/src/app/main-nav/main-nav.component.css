@@ -32,3 +32,25 @@ mat-toolbar > button {
   color: white;
   text-decoration: none;
 }
+
+mat-toolbar a {
+  display: inline-block;
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+mat-toolbar a mat-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: 1.5em;
+  color: white;
+}
+
+a mat-icon {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 0.35em;
+  font-size: 1.5em;
+  color: darkgrey;
+}

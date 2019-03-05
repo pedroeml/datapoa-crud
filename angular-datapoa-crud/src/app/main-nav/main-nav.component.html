@@ -5,10 +5,10 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="drawer.close()">Início</a>
-      <a mat-list-item [routerLink]="['/linhas-onibus']" routerLinkActive="router-link-active" (click)="drawer.close()">Linhas de Ônibus</a>
-      <a mat-list-item [routerLink]="['/linhas-lotacao']" routerLinkActive="router-link-active" (click)="drawer.close()">Linhas de Lotação</a>
-      <a mat-list-item [routerLink]="['/itinerario-unidade']" routerLinkActive="router-link-active" (click)="drawer.close()">Itinerário de Unidade</a>
+      <a mat-list-item [routerLink]="['/home']" routerLinkActive="router-link-active" (click)="drawer.close()"><mat-icon inline=true>home</mat-icon>Início</a>
+      <a mat-list-item [routerLink]="['/itinerario-unidade']" routerLinkActive="router-link-active" (click)="drawer.close()"><mat-icon inline=true>explore</mat-icon>Itinerário de UT</a>
+      <a mat-list-item [routerLink]="['/linhas-onibus']" routerLinkActive="router-link-active" (click)="drawer.close()"><mat-icon inline=true>directions_bus</mat-icon>Linhas de Ônibus</a>
+      <a mat-list-item [routerLink]="['/linhas-lotacao']" routerLinkActive="router-link-active" (click)="drawer.close()"><mat-icon inline=true>directions_transit</mat-icon>Linhas de Lotação</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
