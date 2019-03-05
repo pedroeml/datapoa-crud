@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { MatTableDataSource, ErrorStateMatcher } from '@angular/material';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material';
 import { debounceTime, distinctUntilChanged, switchMap, tap,  } from 'rxjs/operators';
 
 import { ItinerarioUnidadeService } from '../itinerario-unidade.service';
@@ -16,6 +16,7 @@ import { Coordenadas } from '../coordenadas';
 export class ItinerarioUnidadeDetailsComponent implements OnInit {
   private form: FormGroup;
   private isLoading: boolean;
+  private wasFound: boolean;
   private itinerario: ItinerarioUnidade;
   private displayedColumns: string[];
   private dataSource: MatTableDataSource<Coordenadas>;
@@ -24,6 +25,7 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = false;
+    this.wasFound = true;
     this.itinerario = undefined;
     this.dataSource = undefined;
     this.displayedColumns = ['lat', 'lng'];
@@ -38,6 +40,7 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
       tap(_ => (this.isLoading = false))).subscribe(itinerario => {
         this.itinerario = itinerario;
         this.dataSource = itinerario ? new MatTableDataSource(this.itinerario.coordenadas) : undefined;
+        this.wasFound = itinerario ? true : false;
       });
   }
 
