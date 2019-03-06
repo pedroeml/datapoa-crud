@@ -16,7 +16,7 @@
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
           <td mat-cell *matCellDef="let element">
-            <a mat-flat-button [routerLink]="['/itinerario-unidade', element.id]"
+            <a mat-flat-button matTooltip="Olhar itinerário da UT" [routerLink]="['/itinerario-unidade', element.id]"
             routerLinkActive="router-link-active">{{ element.id }}</a>
           </td>
           <td mat-footer-cell *matFooterCellDef></td>
