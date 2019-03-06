@@ -6,3 +6,8 @@
 .mat-card .full-width {
   width: 100%;
 }
+
+.tile-image {
+  width: auto;
+  height: 85%;
+}

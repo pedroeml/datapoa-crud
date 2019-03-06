@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatTooltipModule } from '@angular/material';
 import { HomeRoutingModule } from './home-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 
@@ -9,6 +9,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
   imports: [
     CommonModule,
     MatCardModule,
+    MatGridListModule,
+    MatTooltipModule,
     HomeRoutingModule
   ]
 })
