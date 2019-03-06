@@ -21,6 +21,7 @@ export class ItinerarioUnidadeService {
         const coords = [];
 
         Object.keys(res).filter(key => {
+          // tslint:disable-next-line: radix
           return !isNaN(parseInt(key));
         }).forEach(key => {
           const coord = new Coordenadas(res[key]['lat'], res[key]['lng']);
