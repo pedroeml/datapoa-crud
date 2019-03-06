@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSnackBar } from '@angular/material';
 import { debounceTime, distinctUntilChanged, switchMap, tap,  } from 'rxjs/operators';
 
 import { ItinerarioUnidadeService } from '../itinerario-unidade.service';
@@ -28,6 +28,7 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
   constructor(
     private itinerarioUnidadeService: ItinerarioUnidadeService,
     private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -50,9 +51,11 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.itinerario.coordenadas);
           this.dataSource.paginator = this.paginator;
           this.wasFound = true;
+          this.openSnackBar(`Itinerário da UT ${this.itinerario.id} encontrado!`, 'Fechar');
         } else {
           this.dataSource = undefined;
           this.wasFound = false;
+          this.openSnackBar('Sem resultados!', 'Fechar');
         }
       });
     this.route.params.subscribe((params: ParamMap) => {
@@ -66,4 +69,9 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
     return this.itinerarioUnidadeService.getItinerario(unidadeId);
   }
 
+  private openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000
+    });
+  }
 }
