@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatFormFieldModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatIconModule, MatPaginatorModule, MatSnackBarModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatProgressSpinnerModule, MatCardModule, MatTableModule, MatIconModule, MatPaginatorModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { ItinerarioUnidadeRoutingModule } from './itinerario-unidade-routing.module';
 import { ItinerarioUnidadeDetailsComponent } from './itinerario-unidade-details/itinerario-unidade-details.component';
 import { ItinerarioUnidadeService } from './itinerario-unidade.service';
@@ -20,6 +20,7 @@ import { ItinerarioUnidadeService } from './itinerario-unidade.service';
     MatIconModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatTooltipModule,
     ItinerarioUnidadeRoutingModule
   ],
   providers: [
