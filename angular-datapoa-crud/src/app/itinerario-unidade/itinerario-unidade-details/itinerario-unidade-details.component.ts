@@ -5,8 +5,8 @@ import { MatTableDataSource, MatPaginator, MatSnackBar } from '@angular/material
 import { debounceTime, distinctUntilChanged, switchMap, tap,  } from 'rxjs/operators';
 
 import { ItinerarioUnidadeService } from '../itinerario-unidade.service';
-import { ItinerarioUnidade } from '../itinerario-unidade';
-import { Coordenadas } from '../coordenadas';
+import { ItinerarioUnidadeModel } from '../itinerario-unidade.model';
+import { CoordenadasModel } from '../coordenadas.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
@@ -18,9 +18,9 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
   private form: FormGroup;
   private isLoading: boolean;
   private wasFound: boolean;
-  private itinerario: ItinerarioUnidade;
+  private itinerario: ItinerarioUnidadeModel;
   private displayedColumns: string[];
-  private dataSource: MatTableDataSource<Coordenadas>;
+  private dataSource: MatTableDataSource<CoordenadasModel>;
   private tableSizeOptions = [5, 10, 20];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -65,7 +65,7 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
     });
   }
 
-  private getItinerario(unidadeId: string): Observable<ItinerarioUnidade> {
+  private getItinerario(unidadeId: string): Observable<ItinerarioUnidadeModel> {
     return this.itinerarioUnidadeService.getItinerario(unidadeId);
   }
 

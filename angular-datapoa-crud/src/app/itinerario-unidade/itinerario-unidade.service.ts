@@ -1,37 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { ItinerarioUnidade } from './itinerario-unidade';
-import { Coordenadas } from './coordenadas';
+import { ItinerarioUnidadeModel } from './itinerario-unidade.model';
+import { CoordenadasModel } from './coordenadas.model';
+import { ItinerarioUnidadeRestService } from './itinerario-unidade-rest.service';
 
 @Injectable()
 export class ItinerarioUnidadeService {
-  private baseUrl = 'http://www.poatransporte.com.br/php/facades/process.php';
 
-  constructor(private http: HttpClient) { }
+  constructor(private restService: ItinerarioUnidadeRestService) { }
 
-  getItinerario(unidadeId: string): Observable<ItinerarioUnidade> {
-    return this.http.get<ItinerarioUnidade>(`${this.baseUrl}?a=il&p=${unidadeId}`).pipe(
+  public getItinerario(unidadeId: string): Observable<ItinerarioUnidadeModel> {
+    return this.restService.getItinerario(unidadeId).pipe(
       map(res => {
-        const coords = [];
+        const coords: CoordenadasModel[] = [];
 
         Object.keys(res).filter(key => {
           // tslint:disable-next-line: radix
           return !isNaN(parseInt(key));
         }).forEach(key => {
-          const coord = new Coordenadas(res[key]['lat'], res[key]['lng']);
+          const coord = new CoordenadasModel(res[key]['lat'], res[key]['lng']);
           coords.push(coord);
         });
 
-        return new ItinerarioUnidade(res['idlinha'], res['nome'], res['codigo'], coords);
+        return new ItinerarioUnidadeModel(res.idlinha, res.nome, res.codigo, coords);
       }),
       tap(el => console.log(el),
           err => console.error(`Error on fetching Itinerario UT ${unidadeId}`),
           () => console.log(`Fetched Itinerario UT ${unidadeId}`)
       ),
-      catchError(this.handleError<ItinerarioUnidade>(`getItinerario unidadeId=${unidadeId}`))
+      catchError(this.handleError<ItinerarioUnidadeModel>(`getItinerario unidadeId=${unidadeId}`))
     );
   }
 

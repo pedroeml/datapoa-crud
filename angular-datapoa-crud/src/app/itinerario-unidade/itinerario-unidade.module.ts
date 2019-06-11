@@ -6,6 +6,7 @@ import { MatInputModule, MatFormFieldModule, MatProgressSpinnerModule, MatCardMo
 import { ItinerarioUnidadeRoutingModule } from './itinerario-unidade-routing.module';
 import { ItinerarioUnidadeDetailsComponent } from './itinerario-unidade-details/itinerario-unidade-details.component';
 import { ItinerarioUnidadeService } from './itinerario-unidade.service';
+import { ItinerarioUnidadeRestService } from './itinerario-unidade-rest.service';
 
 @NgModule({
   declarations: [ItinerarioUnidadeDetailsComponent],
@@ -25,7 +26,8 @@ import { ItinerarioUnidadeService } from './itinerario-unidade.service';
     ItinerarioUnidadeRoutingModule
   ],
   providers: [
-    ItinerarioUnidadeService
+    ItinerarioUnidadeService,
+    ItinerarioUnidadeRestService
   ]
 })
 export class ItinerarioUnidadeModule { }
