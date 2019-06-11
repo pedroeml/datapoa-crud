@@ -3,13 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { ItinerarioUnidadeModule } from './itinerario-unidade.module';
 import { ItinerarioUnidade } from './itinerario-unidade';
 import { Coordenadas } from './coordenadas';
 
-@Injectable({
-  providedIn: ItinerarioUnidadeModule
-})
+@Injectable()
 export class ItinerarioUnidadeService {
   private baseUrl = 'http://www.poatransporte.com.br/php/facades/process.php';
 

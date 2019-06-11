@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { LinhasOnibusModule } from './linhas-onibus.module';
 import { Observable, of } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { Onibus } from './onibus';
 
-@Injectable({
-  providedIn: LinhasOnibusModule
-})
+@Injectable()
 export class LinhasOnibusService {
   private baseUrl = 'http://www.poatransporte.com.br/php/facades/process.php';
 
