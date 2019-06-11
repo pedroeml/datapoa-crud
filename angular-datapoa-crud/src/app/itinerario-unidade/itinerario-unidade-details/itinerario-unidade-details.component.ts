@@ -4,9 +4,9 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, MatSnackBar } from '@angular/material';
 import { debounceTime, distinctUntilChanged, switchMap, tap,  } from 'rxjs/operators';
 
-import { ItinerarioUnidadeService } from '../itinerario-unidade.service';
-import { ItinerarioUnidadeModel } from '../itinerario-unidade.model';
-import { CoordenadasModel } from '../coordenadas.model';
+import { ItinerarioUnidadeService } from '../service/itinerario-unidade.service';
+import { ItinerarioUnidadeModel } from '../model/itinerario-unidade.model';
+import { CoordenadasModel } from '../model/coordenadas.model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({

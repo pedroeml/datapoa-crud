@@ -5,8 +5,8 @@ import { MatInputModule, MatFormFieldModule, MatProgressSpinnerModule, MatCardMo
          MatTableModule, MatIconModule, MatPaginatorModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { ItinerarioUnidadeRoutingModule } from './itinerario-unidade-routing.module';
 import { ItinerarioUnidadeDetailsComponent } from './itinerario-unidade-details/itinerario-unidade-details.component';
-import { ItinerarioUnidadeService } from './itinerario-unidade.service';
-import { ItinerarioUnidadeRestService } from './itinerario-unidade-rest.service';
+import { ItinerarioUnidadeService } from './service/itinerario-unidade.service';
+import { ItinerarioUnidadeRestService } from './service/itinerario-unidade-rest.service';
 
 @NgModule({
   declarations: [ItinerarioUnidadeDetailsComponent],

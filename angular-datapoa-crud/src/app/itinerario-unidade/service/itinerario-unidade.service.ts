@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { ItinerarioUnidadeModel } from './itinerario-unidade.model';
-import { CoordenadasModel } from './coordenadas.model';
+import { ItinerarioUnidadeModel } from '../model/itinerario-unidade.model';
+import { CoordenadasModel } from '../model/coordenadas.model';
 import { ItinerarioUnidadeRestService } from './itinerario-unidade-rest.service';
 
 @Injectable()
