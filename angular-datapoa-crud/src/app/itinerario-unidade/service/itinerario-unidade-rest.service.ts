@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ItinerarioUnidadeResponse } from '../model/itinerario-unidade.interface';
+import { ItinerarioUnidadeResponse } from '../model/itinerario-unidade.response';
 
 @Injectable()
 export class ItinerarioUnidadeRestService {
