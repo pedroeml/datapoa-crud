@@ -1,24 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
-import { Onibus } from './onibus';
+import { OnibusModel } from '../model/onibus.model';
+import { LinhasOnibusRestService } from './linhas-onibus-rest.service';
 
 @Injectable()
 export class LinhasOnibusService {
-  private baseUrl = 'http://www.poatransporte.com.br/php/facades/process.php';
+  constructor(private restService: LinhasOnibusRestService) { }
 
-  constructor(private http: HttpClient) { }
-
-  getLinhasOnibus(): Observable<Onibus[]> {
-    return this.http.get<Onibus[]>(`${this.baseUrl}?a=nc&p=%&t=o`).pipe(
-      map(res => res.map(onibus => new Onibus(onibus['id'], onibus['nome'], onibus['codigo']))),
+  public getLinhasOnibus(): Observable<OnibusModel[]> {
+    return this.restService.getLinhasOnibus().pipe(
+      map(res => res.map(onibus => new OnibusModel(onibus.id, onibus.nome, onibus.codigo))),
       tap(el => console.log(el),
           err => console.error('Error on fetching Linhas de Ônibus'),
           () => console.log('Fetched Linhas de Ônibus')
       ),
-      catchError(this.handleError<Onibus[]>(`getLinhasOnibus`))
+      catchError(this.handleError<OnibusModel[]>(`getLinhasOnibus`))
     );
   }
 

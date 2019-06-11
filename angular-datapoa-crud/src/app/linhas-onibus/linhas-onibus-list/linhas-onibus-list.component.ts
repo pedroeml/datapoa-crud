@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
-import { Onibus } from './../onibus';
-import { LinhasOnibusService } from '../linhas-onibus.service';
+import { OnibusModel } from '../model/onibus.model';
+import { LinhasOnibusService } from '../service/linhas-onibus.service';
 
 @Component({
   selector: 'app-linhas-onibus-list',
@@ -15,9 +15,9 @@ import { LinhasOnibusService } from '../linhas-onibus.service';
 export class LinhasOnibusListComponent implements OnInit {
   private form: FormGroup;
   private isLoading: boolean;
-  private onibusList: Onibus[];
+  private onibusList: OnibusModel[];
   private displayedColumns: string[];
-  private dataSource: MatTableDataSource<Onibus>;
+  private dataSource: MatTableDataSource<OnibusModel>;
   private tableSizeOptions = [5, 10, 20];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -53,11 +53,11 @@ export class LinhasOnibusListComponent implements OnInit {
     });
   }
 
-  private getLinhasOnibus(): Observable<Onibus[]> {
+  private getLinhasOnibus(): Observable<OnibusModel[]> {
     return this.linhasOnibusService.getLinhasOnibus();
   }
 
-  applyFilter(filterValue: string): Onibus[] {
+  applyFilter(filterValue: string): OnibusModel[] {
     this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
     return this.dataSource.filteredData;
   }

@@ -5,7 +5,8 @@ import { MatCardModule, MatFormFieldModule, MatProgressSpinnerModule, MatTableMo
          MatIconModule, MatPaginatorModule, MatSortModule, MatInputModule, MatTooltipModule } from '@angular/material';
 import { LinhasOnibusRoutingModule } from './linhas-onibus-routing.module';
 import { LinhasOnibusListComponent } from './linhas-onibus-list/linhas-onibus-list.component';
-import { LinhasOnibusService } from './linhas-onibus.service';
+import { LinhasOnibusService } from './service/linhas-onibus.service';
+import { LinhasOnibusRestService } from './service/linhas-onibus-rest.service';
 
 @NgModule({
   declarations: [LinhasOnibusListComponent],
@@ -25,7 +26,8 @@ import { LinhasOnibusService } from './linhas-onibus.service';
     LinhasOnibusRoutingModule
   ],
   providers: [
-    LinhasOnibusService
+    LinhasOnibusService,
+    LinhasOnibusRestService
   ]
 })
 export class LinhasOnibusModule { }
