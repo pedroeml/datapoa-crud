@@ -1,4 +1,13 @@
+import { LotacaoResponse } from '../integration/lotacao.response';
 
 export class LotacaoModel {
-  constructor(public id: string, public nome: string, public codigo: string) { }
+  public readonly id: string;
+  public readonly nome: string;
+  public readonly codigo: string;
+
+  constructor(lotacao: LotacaoResponse) {
+    this.id = lotacao.id;
+    this.nome = lotacao.nome;
+    this.codigo = lotacao.codigo;
+  }
 }

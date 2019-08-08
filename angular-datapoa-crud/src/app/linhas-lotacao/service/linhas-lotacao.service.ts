@@ -12,7 +12,7 @@ export class LinhasLotacaoService {
 
   public getLinhasLotacao(): Observable<LotacaoModel[]> {
     return this.restService.getLinhasLotacao().pipe(
-      map(res => res.map(lotacao => new LotacaoModel(lotacao.id, lotacao.nome, lotacao.codigo))),
+      map(res => res.map(lotacao => new LotacaoModel(lotacao))),
       tap(el => console.log(el),
           err => console.error('Error on fetching Linhas de Lotação'),
           () => console.log('Fetched Linhas de Lotação')),

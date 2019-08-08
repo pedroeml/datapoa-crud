@@ -12,7 +12,7 @@ export class LinhasOnibusService {
 
   public getLinhasOnibus(): Observable<OnibusModel[]> {
     return this.restService.getLinhasOnibus().pipe(
-      map(res => res.map(onibus => new OnibusModel(onibus.id, onibus.nome, onibus.codigo))),
+      map(res => res.map(onibus => new OnibusModel(onibus))),
       tap(el => console.log(el),
           err => console.error('Error on fetching Linhas de Ônibus'),
           () => console.log('Fetched Linhas de Ônibus')),

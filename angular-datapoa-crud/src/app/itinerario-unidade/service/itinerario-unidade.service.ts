@@ -29,9 +29,9 @@ export class ItinerarioUnidadeService {
 
   private buildItinerario(itinerario: ItinerarioUnidadeResponse): ItinerarioUnidadeModel {
     const coords: CoordenadasModel[] = this.filterByIndexedEntries(itinerario)
-      .map(key => new CoordenadasModel(itinerario[key].lat, itinerario[key].lng));
+      .map(key => new CoordenadasModel(itinerario[key]));
 
-    return new ItinerarioUnidadeModel(itinerario.idlinha, itinerario.nome, itinerario.codigo, coords);
+    return new ItinerarioUnidadeModel(itinerario, coords);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
