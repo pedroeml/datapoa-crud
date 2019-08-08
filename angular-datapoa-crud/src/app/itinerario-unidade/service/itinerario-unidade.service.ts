@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { ItinerarioUnidadeResponse } from '../integration/itinerario-unidade.response';
 import { ItinerarioUnidadeModel } from '../model/itinerario-unidade.model';
 import { CoordenadasModel } from '../model/coordenadas.model';
 import { ItinerarioUnidadeRestService } from './itinerario-unidade-rest.service';
@@ -13,25 +14,24 @@ export class ItinerarioUnidadeService {
 
   public getItinerario(unidadeId: string): Observable<ItinerarioUnidadeModel> {
     return this.restService.getItinerario(unidadeId).pipe(
-      map(res => {
-        const coords: CoordenadasModel[] = [];
-
-        Object.keys(res).filter(key => {
-          // tslint:disable-next-line: radix
-          return !isNaN(parseInt(key));
-        }).forEach(key => {
-          const coord = new CoordenadasModel(res[key]['lat'], res[key]['lng']);
-          coords.push(coord);
-        });
-
-        return new ItinerarioUnidadeModel(res.idlinha, res.nome, res.codigo, coords);
-      }),
+      map(res => this.buildItinerario(res)),
       tap(el => console.log(el),
           err => console.error(`Error on fetching Itinerario UT ${unidadeId}`),
-          () => console.log(`Fetched Itinerario UT ${unidadeId}`)
-      ),
+          () => console.log(`Fetched Itinerario UT ${unidadeId}`)),
       catchError(this.handleError<ItinerarioUnidadeModel>(`getItinerario unidadeId=${unidadeId}`))
     );
+  }
+
+  private filterByIndexedEntries(anyObject: any): number[] {
+    // tslint:disable-next-line: radix
+    return Object.keys(anyObject).filter(key => !isNaN(parseInt(key))).map(key => Number(key));
+  }
+
+  private buildItinerario(itinerario: ItinerarioUnidadeResponse): ItinerarioUnidadeModel {
+    const coords: CoordenadasModel[] = this.filterByIndexedEntries(itinerario)
+      .map(key => new CoordenadasModel(itinerario[key].lat, itinerario[key].lng));
+
+    return new ItinerarioUnidadeModel(itinerario.idlinha, itinerario.nome, itinerario.codigo, coords);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
