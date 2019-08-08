@@ -5,7 +5,8 @@ import { MatCardModule, MatFormFieldModule, MatProgressSpinnerModule, MatTableMo
          MatIconModule, MatPaginatorModule, MatSortModule, MatInputModule, MatTooltipModule } from '@angular/material';
 import { LinhasLotacaoRoutingModule } from './linhas-lotacao-routing.module';
 import { LinhasLotacaoListComponent } from './linhas-lotacao-list/linhas-lotacao-list.component';
-import { LinhasLotacaoService } from './linhas-lotacao.service';
+import { LinhasLotacaoService } from './service/linhas-lotacao.service';
+import { LinhasLotacaoRestService } from './service/linhas-lotacao-rest.service';
 
 @NgModule({
   declarations: [LinhasLotacaoListComponent],
@@ -25,7 +26,8 @@ import { LinhasLotacaoService } from './linhas-lotacao.service';
     LinhasLotacaoRoutingModule
   ],
   providers: [
-    LinhasLotacaoService
+    LinhasLotacaoService,
+    LinhasLotacaoRestService
   ]
 })
 export class LinhasLotacaoModule { }
