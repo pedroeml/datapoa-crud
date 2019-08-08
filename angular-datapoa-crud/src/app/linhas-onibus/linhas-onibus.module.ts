@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatCardModule, MatFormFieldModule, MatProgressSpinnerModule, MatTableModule,
          MatIconModule, MatPaginatorModule, MatSortModule, MatInputModule, MatTooltipModule } from '@angular/material';
+
 import { LinhasOnibusRoutingModule } from './linhas-onibus-routing.module';
 import { LinhasOnibusListComponent } from './linhas-onibus-list/linhas-onibus-list.component';
 import { LinhasOnibusService } from './service/linhas-onibus.service';

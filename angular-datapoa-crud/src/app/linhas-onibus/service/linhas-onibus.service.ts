@@ -13,8 +13,7 @@ export class LinhasOnibusService {
       map(res => res.map(onibus => new OnibusModel(onibus.id, onibus.nome, onibus.codigo))),
       tap(el => console.log(el),
           err => console.error('Error on fetching Linhas de Ônibus'),
-          () => console.log('Fetched Linhas de Ônibus')
-      ),
+          () => console.log('Fetched Linhas de Ônibus')),
       catchError(this.handleError<OnibusModel[]>(`getLinhasOnibus`))
     );
   }
