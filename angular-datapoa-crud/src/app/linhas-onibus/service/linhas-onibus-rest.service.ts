@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OnibusResponse } from '../model/onibus.response';
+
+import { OnibusResponse } from '../integration/onibus.response';
 
 @Injectable()
 export class LinhasOnibusRestService {
