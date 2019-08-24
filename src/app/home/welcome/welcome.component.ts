@@ -14,7 +14,7 @@ export interface Tile {
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-  private tiles: Tile[] = [{
+  public tiles: Tile[] = [{
     text: 'Esta aplicação foi desenvolvida utilizando Angular CLI 7.',
     cols: 2,
     rows: 2,
