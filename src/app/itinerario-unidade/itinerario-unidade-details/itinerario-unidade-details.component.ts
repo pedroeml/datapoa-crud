@@ -24,7 +24,7 @@ export class ItinerarioUnidadeDetailsComponent implements OnInit {
   public dataSource: MatTableDataSource<CoordenadasModel>;
   public tableSizeOptions: number[];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   constructor(
     private itinerarioUnidadeService: ItinerarioUnidadeService,

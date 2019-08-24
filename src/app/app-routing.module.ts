@@ -3,16 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
   path: 'home',
-  loadChildren: './home/home.module#HomeModule'
+  loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
 }, {
   path: 'linhas-onibus',
-  loadChildren: './linhas-onibus/linhas-onibus.module#LinhasOnibusModule'
+  loadChildren: () => import('./linhas-onibus/linhas-onibus.module').then(m => m.LinhasOnibusModule)
 }, {
   path: 'linhas-lotacao',
-  loadChildren: './linhas-lotacao/linhas-lotacao.module#LinhasLotacaoModule'
+  loadChildren: () => import('./linhas-lotacao/linhas-lotacao.module').then(m => m.LinhasLotacaoModule)
 }, {
   path: 'itinerario-unidade',
-  loadChildren: './itinerario-unidade/itinerario-unidade.module#ItinerarioUnidadeModule'
+  loadChildren: () => import('./itinerario-unidade/itinerario-unidade.module').then(m => m.ItinerarioUnidadeModule)
 }, {
   path: '',
   redirectTo: 'home',
